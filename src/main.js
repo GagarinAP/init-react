@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-var App = require('./assets/App.jsx');
+import App from './assets/App.jsx';
 
 ReactDOM.render(
     <App />,
