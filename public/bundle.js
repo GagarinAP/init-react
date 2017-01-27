@@ -21601,54 +21601,33 @@
 	        _reactBootstrap.Navbar,
 	        null,
 	        _react2.default.createElement(
-	          _reactBootstrap.Navbar.Header,
-	          null,
+	          'div',
+	          { className: 'container' },
 	          _react2.default.createElement(
-	            _reactBootstrap.Navbar.Brand,
+	            _reactBootstrap.Navbar.Header,
 	            null,
 	            _react2.default.createElement(
-	              'a',
-	              { href: '#' },
-	              'React-Bootstrap'
+	              _reactBootstrap.Navbar.Brand,
+	              null,
+	              _react2.default.createElement(
+	                'a',
+	                { href: '#' },
+	                'Harley'
+	              )
 	            )
-	          )
-	        ),
-	        _react2.default.createElement(
-	          _reactBootstrap.Nav,
-	          null,
-	          _react2.default.createElement(
-	            _reactBootstrap.NavItem,
-	            { eventKey: 1, href: '#' },
-	            'Link'
 	          ),
 	          _react2.default.createElement(
-	            _reactBootstrap.NavItem,
-	            { eventKey: 2, href: '#' },
-	            'Link'
-	          ),
-	          _react2.default.createElement(
-	            _reactBootstrap.NavDropdown,
-	            { eventKey: 3, title: 'Dropdown', id: 'basic-nav-dropdown' },
+	            _reactBootstrap.Nav,
+	            null,
 	            _react2.default.createElement(
-	              _reactBootstrap.MenuItem,
-	              { eventKey: 3.1 },
-	              'Action'
+	              _reactBootstrap.NavItem,
+	              { eventKey: 1, href: '#' },
+	              'Link1'
 	            ),
 	            _react2.default.createElement(
-	              _reactBootstrap.MenuItem,
-	              { eventKey: 3.2 },
-	              'Another action'
-	            ),
-	            _react2.default.createElement(
-	              _reactBootstrap.MenuItem,
-	              { eventKey: 3.3 },
-	              'Something else here'
-	            ),
-	            _react2.default.createElement(_reactBootstrap.MenuItem, { divider: true }),
-	            _react2.default.createElement(
-	              _reactBootstrap.MenuItem,
-	              { eventKey: 3.3 },
-	              'Separated link'
+	              _reactBootstrap.NavItem,
+	              { eventKey: 2, href: '#' },
+	              'Link2'
 	            )
 	          )
 	        )
@@ -62860,8 +62839,6 @@
 
 	var _reactChartjs = __webpack_require__(654);
 
-	var _reactChartjs2 = _interopRequireDefault(_reactChartjs);
-
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -62870,13 +62847,38 @@
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
+	var data = {
+	  labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+	  datasets: [{
+	    label: 'My First dataset',
+	    fill: false,
+	    lineTension: 0.1,
+	    backgroundColor: 'rgba(75,192,192,0.4)',
+	    borderColor: 'rgba(75,192,192,1)',
+	    borderCapStyle: 'butt',
+	    borderDash: [],
+	    borderDashOffset: 0.0,
+	    borderJoinStyle: 'miter',
+	    pointBorderColor: 'rgba(75,192,192,1)',
+	    pointBackgroundColor: '#fff',
+	    pointBorderWidth: 1,
+	    pointHoverRadius: 5,
+	    pointHoverBackgroundColor: 'rgba(75,192,192,1)',
+	    pointHoverBorderColor: 'rgba(220,220,220,1)',
+	    pointHoverBorderWidth: 2,
+	    pointRadius: 1,
+	    pointHitRadius: 10,
+	    data: [65, 59, 80, 81, 56, 55, 40]
+	  }]
+	};
+
 	var Charts = function (_React$Component) {
 	  _inherits(Charts, _React$Component);
 
 	  function Charts() {
 	    _classCallCheck(this, Charts);
 
-	    return _possibleConstructorReturn(this, (Charts.__proto__ || Object.getPrototypeOf(Charts)).apply(this, arguments));
+	    return _possibleConstructorReturn(this, (Charts.__proto__ || Object.getPrototypeOf(Charts)).call(this));
 	  }
 
 	  _createClass(Charts, [{
@@ -62888,7 +62890,7 @@
 	        _react2.default.createElement(
 	          'div',
 	          { className: 'charts' },
-	          _react2.default.createElement(_reactChartjs2.default, { data: chartData, options: chartOptions })
+	          _react2.default.createElement(_reactChartjs.Line, { data: data })
 	        )
 	      );
 	    }
