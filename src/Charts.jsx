@@ -8,12 +8,13 @@ export default class Charts extends React.Component{
     super();
   }
   render(){
-    console.log(this.props.weather);
+    //console.log(this.props.weather);
+    //console.log(this.props.weatherType);
     const data = {
         labels: this.props.weather.map(weathers=>weathers.date),
         datasets: [
             {
-                label: 'Dataset',
+                label: this.props.weatherType,
                 fill: false,
                 lineTension: 0.1,
                 backgroundColor: 'rgba(75,192,192,0.4)',

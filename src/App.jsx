@@ -4,12 +4,21 @@ import Menu from './Menu.jsx';
 import Leaflet from './Leaflet.jsx';
 import Charts from './Charts.jsx';
 
+import {CHART_TYPES} from './Constants/Constants.jsx';
+
 export default class App extends React.Component{
   constructor(props){
     super(props);
-    this.state = {
+    this.changeChartType = this.changeChartType.bind(this);
+    this.state = { 
+      weatherType: CHART_TYPES.TEMPERATURE,
       weather: []
     };
+  }
+  changeChartType (type) {
+      this.setState({
+        weatherType: type
+      });
   }
   componentDidMount() {
       axios.get(`http://localhost:3000/weather`)
@@ -26,9 +35,9 @@ export default class App extends React.Component{
     //console.log(this.state.weather.map(user=>user.name));
     return(
       <div className="container">
-        <Menu />
+        <Menu changeChartType={this.changeChartType} />
         <Leaflet />
-        <Charts weather={this.state.weather}/>
+        <Charts weather={this.state.weather} weatherType={this.state.weatherType} />
       </div>
     );
   }
