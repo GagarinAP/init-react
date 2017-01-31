@@ -21542,10 +21542,12 @@
 	  function App(props) {
 	    _classCallCheck(this, App);
 
-	    return _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).call(this, props));
-	    // this.state = {
-	    //   users: []
-	    // };
+	    var _this = _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).call(this, props));
+
+	    _this.state = {
+	      weather: []
+	    };
+	    return _this;
 	  }
 
 	  _createClass(App, [{
@@ -21553,10 +21555,10 @@
 	    value: function componentDidMount() {
 	      var _this2 = this;
 
-	      _axios2.default.get('http://localhost:3000/users').then(function (res) {
-	        var users = res.data;
-	        //console.log(users);
-	        _this2.setState({ users: users });
+	      _axios2.default.get('http://localhost:3000/weather').then(function (res) {
+	        var weather = res.data;
+	        //console.log(weather);
+	        _this2.setState({ weather: weather });
 	      }).catch(function (error) {
 	        console.log(error);
 	      });
@@ -21564,15 +21566,13 @@
 	  }, {
 	    key: 'render',
 	    value: function render() {
-	      console.log(this.state.users.map(function (user) {
-	        return user.name;
-	      }));
+	      //console.log(this.state.weather.map(user=>user.name));
 	      return _react2.default.createElement(
 	        'div',
 	        { className: 'container' },
 	        _react2.default.createElement(_Menu2.default, null),
 	        _react2.default.createElement(_Leaflet2.default, null),
-	        _react2.default.createElement(_Charts2.default, { users: this.state.users })
+	        _react2.default.createElement(_Charts2.default, { weather: this.state.weather })
 	      );
 	    }
 	  }]);
@@ -23134,12 +23134,17 @@
 	            _react2.default.createElement(
 	              _reactBootstrap.NavItem,
 	              { eventKey: 1, href: '#' },
-	              'Link1'
+	              'Temperature'
 	            ),
 	            _react2.default.createElement(
 	              _reactBootstrap.NavItem,
 	              { eventKey: 2, href: '#' },
-	              'Link2'
+	              'WindSpeed'
+	            ),
+	            _react2.default.createElement(
+	              _reactBootstrap.NavItem,
+	              { eventKey: 3, href: '#' },
+	              'Humidity'
 	            )
 	          )
 	        )
@@ -64373,10 +64378,10 @@
 	  _createClass(Charts, [{
 	    key: 'render',
 	    value: function render() {
-	      console.log(this.props.users);
+	      console.log(this.props.weather);
 	      var data = {
-	        labels: this.props.users.map(function (user) {
-	          return user.name;
+	        labels: this.props.weather.map(function (weathers) {
+	          return weathers.date;
 	        }),
 	        datasets: [{
 	          label: 'Dataset',
@@ -64397,8 +64402,8 @@
 	          pointHoverBorderWidth: 2,
 	          pointRadius: 1,
 	          pointHitRadius: 10,
-	          data: this.props.users.map(function (user) {
-	            return user.age;
+	          data: this.props.weather.map(function (weathers) {
+	            return weathers.temp;
 	          })
 	        }]
 	      };

@@ -8,27 +8,27 @@ export default class App extends React.Component{
   constructor(props){
     super(props);
     this.state = {
-      users: []
+      weather: []
     };
   }
   componentDidMount() {
-      axios.get(`http://localhost:3000/users`)
+      axios.get(`http://localhost:3000/weather`)
             .then(res => {
-                const users = res.data;
-                //console.log(users);
-                this.setState({ users });
+                const weather = res.data;
+                //console.log(weather);
+                this.setState({ weather });
             })
             .catch(function (error) {
                 console.log(error);
             });
   }
   render(){
-    //console.log(this.state.users.map(user=>user.name));
+    //console.log(this.state.weather.map(user=>user.name));
     return(
       <div className="container">
         <Menu />
         <Leaflet />
-        <Charts users={this.state.users}/>
+        <Charts weather={this.state.weather}/>
       </div>
     );
   }

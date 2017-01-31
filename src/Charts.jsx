@@ -8,9 +8,9 @@ export default class Charts extends React.Component{
     super();
   }
   render(){
-    console.log(this.props.users);
+    console.log(this.props.weather);
     const data = {
-        labels: this.props.users.map(user=>user.name),
+        labels: this.props.weather.map(weathers=>weathers.date),
         datasets: [
             {
                 label: 'Dataset',
@@ -31,7 +31,7 @@ export default class Charts extends React.Component{
                 pointHoverBorderWidth: 2,
                 pointRadius: 1,
                 pointHitRadius: 10,
-                data: this.props.users.map(user=>user.age)
+                data: this.props.weather.map(weathers=>weathers.temp)
             }
         ]
     };

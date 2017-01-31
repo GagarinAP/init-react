@@ -12,8 +12,9 @@ export default class Menu extends React.Component{
           </Navbar.Brand>
         </Navbar.Header>
         <Nav>
-          <NavItem eventKey={1} href="#">Link1</NavItem>
-          <NavItem eventKey={2} href="#">Link2</NavItem>
+          <NavItem eventKey={1} href="#">Temperature</NavItem>
+          <NavItem eventKey={2} href="#">WindSpeed</NavItem>
+          <NavItem eventKey={3} href="#">Humidity</NavItem>
         </Nav>
         </div>
       </Navbar>
