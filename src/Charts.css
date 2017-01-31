@@ -1,5 +1,5 @@
-.maps {
-    height: 400px;
+.charts {
+    max-height: 600px;
     padding: 16px;
     margin: 16px;
     background-color: white;
@@ -7,9 +7,4 @@
     border-radius: 2px;
     display: flex;
     flex-direction: column;
-}
-
-.leaflet-container {
-    height: 400px;
-    width: 100%;
 }
