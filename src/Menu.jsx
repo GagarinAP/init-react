@@ -5,7 +5,6 @@ import {CHART_TYPES} from './Constants/Constants.jsx';
 export default class Menu extends React.Component{
   constructor(){
     super();
-    this.showChart = this.showChart.bind(this);
     this.setChartType = this.setChartType.bind(this);
 
     this.state = {
@@ -13,15 +12,13 @@ export default class Menu extends React.Component{
     }
   }
 
-  showChart () {
-    if (this.props.changeChartType) {
-      this.props.changeChartType(this.state.weatherType);
-    }
-  }
-
   setChartType (type) {
     this.setState({
       weatherType: type
+    }, () => {
+      if (this.props.changeChartType) {
+        this.props.changeChartType(this.state.weatherType);
+      }   
     });
   }
   render(){
@@ -38,21 +35,21 @@ export default class Menu extends React.Component{
           <NavItem  
             eventKey={1} 
             onClick={()=>this.setChartType(CHART_TYPES.TEMPERATURE)}     
-            onChange={this.showChart}
+            onChange={() => {}}
           >
             TEMPERATURE
           </NavItem>
           <NavItem  
             eventKey={2} 
             onClick={()=>this.setChartType(CHART_TYPES.PREASURE)} 
-            onChange={this.showChart}         
+            onChange={() => {}}
           >
             PREASURE
           </NavItem>
           <NavItem 
-            eventKey={3} 
-            onClick={this.showChart}           
-            onChange={() => this.setChartType(CHART_TYPES.WIND_SPEED)}
+            eventKey={3}                       
+            onClick={() => this.setChartType(CHART_TYPES.WIND_SPEED)}
+            onChange={() => {}}
           >
             WIND_SPEED
           </NavItem>

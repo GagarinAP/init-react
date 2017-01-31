@@ -21568,7 +21568,7 @@
 
 	      _axios2.default.get('http://localhost:3000/weather').then(function (res) {
 	        var weather = res.data;
-	        console.log(weather);
+	        //console.log(weather);
 	        _this2.setState({ weather: weather });
 	      }).catch(function (error) {
 	        console.log(error);
@@ -23118,7 +23118,6 @@
 
 	    var _this = _possibleConstructorReturn(this, (Menu.__proto__ || Object.getPrototypeOf(Menu)).call(this));
 
-	    _this.showChart = _this.showChart.bind(_this);
 	    _this.setChartType = _this.setChartType.bind(_this);
 
 	    _this.state = {
@@ -23128,23 +23127,22 @@
 	  }
 
 	  _createClass(Menu, [{
-	    key: 'showChart',
-	    value: function showChart() {
-	      if (this.props.changeChartType) {
-	        this.props.changeChartType(this.state.weatherType);
-	      }
-	    }
-	  }, {
 	    key: 'setChartType',
 	    value: function setChartType(type) {
+	      var _this2 = this;
+
 	      this.setState({
 	        weatherType: type
+	      }, function () {
+	        if (_this2.props.changeChartType) {
+	          _this2.props.changeChartType(_this2.state.weatherType);
+	        }
 	      });
 	    }
 	  }, {
 	    key: 'render',
 	    value: function render() {
-	      var _this2 = this;
+	      var _this3 = this;
 
 	      console.log();
 	      return _react2.default.createElement(
@@ -23174,9 +23172,9 @@
 	              {
 	                eventKey: 1,
 	                onClick: function onClick() {
-	                  return _this2.setChartType(_Constants.CHART_TYPES.TEMPERATURE);
+	                  return _this3.setChartType(_Constants.CHART_TYPES.TEMPERATURE);
 	                },
-	                onChange: this.showChart
+	                onChange: function onChange() {}
 	              },
 	              'TEMPERATURE'
 	            ),
@@ -23185,9 +23183,9 @@
 	              {
 	                eventKey: 2,
 	                onClick: function onClick() {
-	                  return _this2.setChartType(_Constants.CHART_TYPES.PREASURE);
+	                  return _this3.setChartType(_Constants.CHART_TYPES.PREASURE);
 	                },
-	                onChange: this.showChart
+	                onChange: function onChange() {}
 	              },
 	              'PREASURE'
 	            ),
@@ -23195,10 +23193,10 @@
 	              _reactBootstrap.NavItem,
 	              {
 	                eventKey: 3,
-	                onClick: this.showChart,
-	                onChange: function onChange() {
-	                  return _this2.setChartType(_Constants.CHART_TYPES.WIND_SPEED);
-	                }
+	                onClick: function onClick() {
+	                  return _this3.setChartType(_Constants.CHART_TYPES.WIND_SPEED);
+	                },
+	                onChange: function onChange() {}
 	              },
 	              'WIND_SPEED'
 	            )
@@ -64449,8 +64447,8 @@
 	  _createClass(Charts, [{
 	    key: 'render',
 	    value: function render() {
-	      console.log(this.props.weather);
-	      console.log(this.props.weatherType);
+	      //console.log(this.props.weather);
+	      //console.log(this.props.weatherType);
 	      var data = {
 	        labels: this.props.weather.map(function (weathers) {
 	          return weathers.date;
