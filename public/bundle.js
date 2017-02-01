@@ -21549,7 +21549,10 @@
 	    _this.changeChartType = _this.changeChartType.bind(_this);
 	    _this.state = {
 	      weatherType: _Constants.CHART_TYPES.TEMPERATURE,
-	      weather: []
+	      Temp: [],
+	      Date: [],
+	      Humidity: [],
+	      Wind: []
 	    };
 	    return _this;
 	  }
@@ -21568,10 +21571,20 @@
 
 	      _axios2.default.get('http://localhost:3000/weather').then(function (res) {
 	        var weather = res.data;
-	        //console.log(weather);
-	        _this2.setState({ weather: weather });
-	      }).catch(function (error) {
-	        console.log(error);
+	        _this2.setState({
+	          Temp: weather.map(function (data) {
+	            return data.temp;
+	          }),
+	          Date: weather.map(function (data) {
+	            return data.date;
+	          }),
+	          Humidity: weather.map(function (data) {
+	            return data.humidity;
+	          }),
+	          Wind: weather.map(function (data) {
+	            return data.wind;
+	          })
+	        });
 	      });
 	    }
 	  }, {
@@ -21583,7 +21596,7 @@
 	        { className: 'container' },
 	        _react2.default.createElement(_Menu2.default, { changeChartType: this.changeChartType }),
 	        _react2.default.createElement(_Leaflet2.default, null),
-	        _react2.default.createElement(_Charts2.default, { weather: this.state.weather, weatherType: this.state.weatherType })
+	        _react2.default.createElement(_Charts2.default, { Wind: this.state.Wind, Humidity: this.state.Humidity, Date: this.state.Date, Temp: this.state.Temp, weatherType: this.state.weatherType })
 	      );
 	    }
 	  }]);
@@ -64450,9 +64463,7 @@
 	      //console.log(this.props.weather);
 	      //console.log(this.props.weatherType);
 	      var data = {
-	        labels: this.props.weather.map(function (weathers) {
-	          return weathers.date;
-	        }),
+	        labels: this.props.Date,
 	        datasets: [{
 	          label: this.props.weatherType,
 	          fill: false,
@@ -64472,9 +64483,7 @@
 	          pointHoverBorderWidth: 2,
 	          pointRadius: 1,
 	          pointHitRadius: 10,
-	          data: this.props.weather.map(function (weathers) {
-	            return weathers.temp;
-	          })
+	          data: [this.props.Temp, this.props.Wind, this.props.Humidity]
 	        }]
 	      };
 	      var option = {

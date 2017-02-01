@@ -12,7 +12,10 @@ export default class App extends React.Component{
     this.changeChartType = this.changeChartType.bind(this);
     this.state = { 
       weatherType: CHART_TYPES.TEMPERATURE,
-      weather: []
+      Temp: [],
+      Date: [],
+      Humidity: [],
+      Wind: []
     };
   }
   changeChartType (type) {
@@ -21,23 +24,25 @@ export default class App extends React.Component{
       });
   }
   componentDidMount() {
-      axios.get(`http://localhost:3000/weather`)
-            .then(res => {
-                const weather = res.data;
-                //console.log(weather);
-                this.setState({ weather });
-            })
-            .catch(function (error) {
-                console.log(error);
-            });
+    axios.get(`http://localhost:3000/weather`)
+      .then(res => {
+        const weather = res.data;        
+        this.setState({ 
+          Temp: weather.map(data=>data.temp),
+          Date: weather.map(data=>data.date),
+          Humidity: weather.map(data=>data.humidity),
+          Wind: weather.map(data=>data.wind)
+        });
+      });
   }
+
   render(){
     //console.log(this.state.weather.map(user=>user.name));
     return(
       <div className="container">
         <Menu changeChartType={this.changeChartType} />
         <Leaflet />
-        <Charts weather={this.state.weather} weatherType={this.state.weatherType} />
+        <Charts Wind={this.state.Wind} Humidity={this.state.Humidity} Date={this.state.Date} Temp={this.state.Temp} weatherType={this.state.weatherType} />
       </div>
     );
   }

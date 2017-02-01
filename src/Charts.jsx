@@ -11,7 +11,7 @@ export default class Charts extends React.Component{
     //console.log(this.props.weather);
     //console.log(this.props.weatherType);
     const data = {
-        labels: this.props.weather.map(weathers=>weathers.date),
+        labels: this.props.Date,
         datasets: [
             {
                 label: this.props.weatherType,
@@ -32,7 +32,7 @@ export default class Charts extends React.Component{
                 pointHoverBorderWidth: 2,
                 pointRadius: 1,
                 pointHitRadius: 10,
-                data: this.props.weather.map(weathers=>weathers.temp)
+                data: [this.props.Temp,this.props.Wind,this.props.Humidity]
             }
         ]
     };
