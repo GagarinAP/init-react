@@ -1,6 +1,6 @@
 import React from 'react';
 import { Line } from 'react-chartjs-2';
-
+import {CHART_TYPES} from './Constants/Constants.jsx';
 require('./Charts.css');
 
 export default class Charts extends React.Component{
@@ -9,13 +9,13 @@ export default class Charts extends React.Component{
   }
   render(){
     let Value;
-    if(this.props.weatherType === 'Temperature'){
+    if(this.props.weatherType === CHART_TYPES.TEMPERATURE){
         Value = this.props.weather.map(weathers=>weathers.temp);
     }
-    if(this.props.weatherType === 'Preasure'){
+    if(this.props.weatherType === CHART_TYPES.PREASURE){
         Value = this.props.weather.map(weathers=>weathers.wind);
     }
-    if(this.props.weatherType === 'Wind Speed'){
+    if(this.props.weatherType === CHART_TYPES.WIND_SPEED){
         Value = this.props.weather.map(weathers=>weathers.humidity);
     }
 
