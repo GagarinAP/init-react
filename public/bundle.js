@@ -21547,12 +21547,10 @@
 	    var _this = _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).call(this, props));
 
 	    _this.changeChartType = _this.changeChartType.bind(_this);
+
 	    _this.state = {
 	      weatherType: _Constants.CHART_TYPES.TEMPERATURE,
-	      Temp: [],
-	      Date: [],
-	      Humidity: [],
-	      Wind: []
+	      weather: []
 	    };
 	    return _this;
 	  }
@@ -21572,18 +21570,7 @@
 	      _axios2.default.get('http://localhost:3000/weather').then(function (res) {
 	        var weather = res.data;
 	        _this2.setState({
-	          Temp: weather.map(function (data) {
-	            return data.temp;
-	          }),
-	          Date: weather.map(function (data) {
-	            return data.date;
-	          }),
-	          Humidity: weather.map(function (data) {
-	            return data.humidity;
-	          }),
-	          Wind: weather.map(function (data) {
-	            return data.wind;
-	          })
+	          weather: weather
 	        });
 	      });
 	    }
@@ -21596,7 +21583,7 @@
 	        { className: 'container' },
 	        _react2.default.createElement(_Menu2.default, { changeChartType: this.changeChartType }),
 	        _react2.default.createElement(_Leaflet2.default, null),
-	        _react2.default.createElement(_Charts2.default, { Wind: this.state.Wind, Humidity: this.state.Humidity, Date: this.state.Date, Temp: this.state.Temp, weatherType: this.state.weatherType })
+	        _react2.default.createElement(_Charts2.default, { weather: this.state.weather, weatherType: this.state.weatherType })
 	      );
 	    }
 	  }]);
@@ -64427,7 +64414,7 @@
 	'use strict';
 
 	Object.defineProperty(exports, "__esModule", {
-	  value: true
+	    value: true
 	});
 
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -64449,59 +64436,76 @@
 	__webpack_require__(837);
 
 	var Charts = function (_React$Component) {
-	  _inherits(Charts, _React$Component);
+	    _inherits(Charts, _React$Component);
 
-	  function Charts() {
-	    _classCallCheck(this, Charts);
+	    function Charts() {
+	        _classCallCheck(this, Charts);
 
-	    return _possibleConstructorReturn(this, (Charts.__proto__ || Object.getPrototypeOf(Charts)).call(this));
-	  }
-
-	  _createClass(Charts, [{
-	    key: 'render',
-	    value: function render() {
-	      //console.log(this.props.weather);
-	      //console.log(this.props.weatherType);
-	      var data = {
-	        labels: this.props.Date,
-	        datasets: [{
-	          label: this.props.weatherType,
-	          fill: false,
-	          lineTension: 0.1,
-	          backgroundColor: 'rgba(75,192,192,0.4)',
-	          borderColor: 'rgba(75,192,192,1)',
-	          borderCapStyle: 'butt',
-	          borderDash: [],
-	          borderDashOffset: 0.0,
-	          borderJoinStyle: 'miter',
-	          pointBorderColor: 'rgba(75,192,192,1)',
-	          pointBackgroundColor: '#fff',
-	          pointBorderWidth: 1,
-	          pointHoverRadius: 5,
-	          pointHoverBackgroundColor: 'rgba(75,192,192,1)',
-	          pointHoverBorderColor: 'rgba(220,220,220,1)',
-	          pointHoverBorderWidth: 2,
-	          pointRadius: 1,
-	          pointHitRadius: 10,
-	          data: [this.props.Temp, this.props.Wind, this.props.Humidity]
-	        }]
-	      };
-	      var option = {
-	        responsive: true
-	      };
-	      return _react2.default.createElement(
-	        'div',
-	        { className: 'container' },
-	        _react2.default.createElement(
-	          'div',
-	          { className: 'charts' },
-	          _react2.default.createElement(_reactChartjs.Line, { data: data, options: option })
-	        )
-	      );
+	        return _possibleConstructorReturn(this, (Charts.__proto__ || Object.getPrototypeOf(Charts)).call(this));
 	    }
-	  }]);
 
-	  return Charts;
+	    _createClass(Charts, [{
+	        key: 'render',
+	        value: function render() {
+	            var Value = void 0;
+	            if (this.props.weatherType === 'Temperature') {
+	                Value = this.props.weather.map(function (weathers) {
+	                    return weathers.temp;
+	                });
+	            }
+	            if (this.props.weatherType === 'Preasure') {
+	                Value = this.props.weather.map(function (weathers) {
+	                    return weathers.wind;
+	                });
+	            }
+	            if (this.props.weatherType === 'Wind Speed') {
+	                Value = this.props.weather.map(function (weathers) {
+	                    return weathers.humidity;
+	                });
+	            }
+
+	            var data = {
+	                labels: this.props.weather.map(function (weathers) {
+	                    return weathers.date;
+	                }),
+	                datasets: [{
+	                    label: this.props.weatherType,
+	                    fill: false,
+	                    lineTension: 0.1,
+	                    backgroundColor: 'rgba(75,192,192,0.4)',
+	                    borderColor: 'rgba(75,192,192,1)',
+	                    borderCapStyle: 'butt',
+	                    borderDash: [],
+	                    borderDashOffset: 0.0,
+	                    borderJoinStyle: 'miter',
+	                    pointBorderColor: 'rgba(75,192,192,1)',
+	                    pointBackgroundColor: '#fff',
+	                    pointBorderWidth: 2,
+	                    pointHoverRadius: 5,
+	                    pointHoverBackgroundColor: 'rgba(75,192,192,1)',
+	                    pointHoverBorderColor: 'rgba(220,220,220,1)',
+	                    pointHoverBorderWidth: 2,
+	                    pointRadius: 5,
+	                    pointHitRadius: 10,
+	                    data: Value
+	                }]
+	            };
+	            var option = {
+	                responsive: true
+	            };
+	            return _react2.default.createElement(
+	                'div',
+	                { className: 'container' },
+	                _react2.default.createElement(
+	                    'div',
+	                    { className: 'charts' },
+	                    _react2.default.createElement(_reactChartjs.Line, { data: data, options: option })
+	                )
+	            );
+	        }
+	    }]);
+
+	    return Charts;
 	}(_react2.default.Component);
 
 	exports.default = Charts;

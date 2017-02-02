@@ -14,10 +14,10 @@ export default class Menu extends React.Component{
 
   setChartType (type) {
     this.setState({
-      weatherType: type
+      weatherType: type      
     }, () => {
       if (this.props.changeChartType) {
-        this.props.changeChartType(this.state.weatherType);
+        this.props.changeChartType(this.state.weatherType);        
       }   
     });
   }

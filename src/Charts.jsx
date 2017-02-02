@@ -8,10 +8,19 @@ export default class Charts extends React.Component{
     super();
   }
   render(){
-    //console.log(this.props.weather);
-    //console.log(this.props.weatherType);
+    let Value;
+    if(this.props.weatherType === 'Temperature'){
+        Value = this.props.weather.map(weathers=>weathers.temp);
+    }
+    if(this.props.weatherType === 'Preasure'){
+        Value = this.props.weather.map(weathers=>weathers.wind);
+    }
+    if(this.props.weatherType === 'Wind Speed'){
+        Value = this.props.weather.map(weathers=>weathers.humidity);
+    }
+
     const data = {
-        labels: this.props.Date,
+        labels: this.props.weather.map(weathers=>weathers.date),
         datasets: [
             {
                 label: this.props.weatherType,
@@ -25,14 +34,14 @@ export default class Charts extends React.Component{
                 borderJoinStyle: 'miter',
                 pointBorderColor: 'rgba(75,192,192,1)',
                 pointBackgroundColor: '#fff',
-                pointBorderWidth: 1,
+                pointBorderWidth: 2,
                 pointHoverRadius: 5,
                 pointHoverBackgroundColor: 'rgba(75,192,192,1)',
                 pointHoverBorderColor: 'rgba(220,220,220,1)',
                 pointHoverBorderWidth: 2,
-                pointRadius: 1,
+                pointRadius: 5,
                 pointHitRadius: 10,
-                data: [this.props.Temp,this.props.Wind,this.props.Humidity]
+                data: Value
             }
         ]
     };
