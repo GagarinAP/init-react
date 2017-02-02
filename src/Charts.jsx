@@ -6,19 +6,16 @@ require('./Charts.css');
 export default class Charts extends React.Component{
   constructor() {
     super();
+    this._getChartValue = this._getChartValue.bind(this);
+  }
+  _getChartValue() {
+      switch(this.props.weatherType) {
+          case CHART_TYPES.TEMPERATURE: return this.props.weather.map(weathers=>weathers.temp);
+          case CHART_TYPES.PREASURE: return this.props.weather.map(weathers=>weathers.wind);
+          case CHART_TYPES.WIND_SPEED: return this.props.weather.map(weathers=>weathers.humidity);
+      }
   }
   render(){
-    let Value;
-    if(this.props.weatherType === CHART_TYPES.TEMPERATURE){
-        Value = this.props.weather.map(weathers=>weathers.temp);
-    }
-    if(this.props.weatherType === CHART_TYPES.PREASURE){
-        Value = this.props.weather.map(weathers=>weathers.wind);
-    }
-    if(this.props.weatherType === CHART_TYPES.WIND_SPEED){
-        Value = this.props.weather.map(weathers=>weathers.humidity);
-    }
-
     const data = {
         labels: this.props.weather.map(weathers=>weathers.date),
         datasets: [
@@ -41,7 +38,7 @@ export default class Charts extends React.Component{
                 pointHoverBorderWidth: 2,
                 pointRadius: 5,
                 pointHitRadius: 10,
-                data: Value
+                data: this._getChartValue()
             }
         ]
     };
